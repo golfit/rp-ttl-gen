@@ -1,0 +1,356 @@
+Vivado Simulator 2017.4
+Time resolution is 1 ps
+Starting simulation
+armed
+bram_portb_addr=0
+armed
+bram_portb_addr=0
+armed
+bram_portb_addr=0
+armed
+bram_portb_addr=0
+armed
+bram_portb_addr=0
+                  21: clk_cntr=         1, this_wait=        10, mem_ptr=    0
+bram_portb_addr=0
+                  23: clk_cntr=         2, this_wait=        10, mem_ptr=    0
+bram_portb_addr=0
+                  25: clk_cntr=         3, this_wait=        10, mem_ptr=    0
+bram_portb_addr=0
+                  27: clk_cntr=         4, this_wait=        10, mem_ptr=    0
+bram_portb_addr=0
+                  29: clk_cntr=         5, this_wait=        10, mem_ptr=    0
+bram_portb_addr=0
+                  31: clk_cntr=         6, this_wait=        10, mem_ptr=    0
+bram_portb_addr=0
+                  33: clk_cntr=         7, this_wait=        10, mem_ptr=    0
+bram_portb_addr=0
+                  35: clk_cntr=         8, this_wait=        10, mem_ptr=    0
+bram_portb_addr=0
+                  37: clk_cntr=         9, this_wait=        10, mem_ptr=    0
+bram_portb_addr=0
+                  39: clk_cntr=        10, this_wait=        10, mem_ptr=    0
+bram_portb_addr=0
+                  41: just waited         10
+                  41: clk_cntr=         1, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                  43: clk_cntr=         2, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                  45: clk_cntr=         3, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                  47: clk_cntr=         4, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                  49: clk_cntr=         5, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                  51: clk_cntr=         6, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                  53: clk_cntr=         7, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                  55: clk_cntr=         8, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                  57: clk_cntr=         9, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                  59: clk_cntr=        10, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                  61: just waited         20
+                  61: clk_cntr=         1, this_wait=        20, mem_ptr=    2
+                  63: clk_cntr=         2, this_wait=        20, mem_ptr=    2
+                  65: clk_cntr=         3, this_wait=        20, mem_ptr=    2
+                  67: clk_cntr=         4, this_wait=        20, mem_ptr=    2
+                  69: clk_cntr=         5, this_wait=        20, mem_ptr=    2
+                  71: clk_cntr=         6, this_wait=        20, mem_ptr=    2
+                  73: clk_cntr=         7, this_wait=        20, mem_ptr=    2
+                  75: clk_cntr=         8, this_wait=        20, mem_ptr=    2
+                  77: clk_cntr=         9, this_wait=        20, mem_ptr=    2
+                  79: clk_cntr=        10, this_wait=        20, mem_ptr=    2
+                  81: clk_cntr=        11, this_wait=        20, mem_ptr=    2
+                  83: clk_cntr=        12, this_wait=        20, mem_ptr=    2
+                  85: clk_cntr=        13, this_wait=        20, mem_ptr=    2
+                  87: clk_cntr=        14, this_wait=        20, mem_ptr=    2
+                  89: clk_cntr=        15, this_wait=        20, mem_ptr=    2
+                  91: clk_cntr=        16, this_wait=        20, mem_ptr=    2
+                  93: clk_cntr=        17, this_wait=        20, mem_ptr=    2
+                  95: clk_cntr=        18, this_wait=        20, mem_ptr=    2
+                  97: clk_cntr=        19, this_wait=        20, mem_ptr=    2
+                  99: clk_cntr=        20, this_wait=        20, mem_ptr=    2
+                 101: just waited         30
+                 101: clk_cntr=         1, this_wait=        30, mem_ptr=    3
+                 103: clk_cntr=         2, this_wait=        30, mem_ptr=    3
+                 105: clk_cntr=         3, this_wait=        30, mem_ptr=    3
+                 107: clk_cntr=         4, this_wait=        30, mem_ptr=    3
+                 109: clk_cntr=         5, this_wait=        30, mem_ptr=    3
+                 111: clk_cntr=         6, this_wait=        30, mem_ptr=    3
+                 113: clk_cntr=         7, this_wait=        30, mem_ptr=    3
+                 115: clk_cntr=         8, this_wait=        30, mem_ptr=    3
+                 117: clk_cntr=         9, this_wait=        30, mem_ptr=    3
+                 119: clk_cntr=        10, this_wait=        30, mem_ptr=    3
+                 121: clk_cntr=        11, this_wait=        30, mem_ptr=    3
+                 123: clk_cntr=        12, this_wait=        30, mem_ptr=    3
+                 125: clk_cntr=        13, this_wait=        30, mem_ptr=    3
+                 127: clk_cntr=        14, this_wait=        30, mem_ptr=    3
+                 129: clk_cntr=        15, this_wait=        30, mem_ptr=    3
+                 131: clk_cntr=        16, this_wait=        30, mem_ptr=    3
+                 133: clk_cntr=        17, this_wait=        30, mem_ptr=    3
+                 135: clk_cntr=        18, this_wait=        30, mem_ptr=    3
+                 137: clk_cntr=        19, this_wait=        30, mem_ptr=    3
+                 139: clk_cntr=        20, this_wait=        30, mem_ptr=    3
+                 141: clk_cntr=        21, this_wait=        30, mem_ptr=    3
+                 143: clk_cntr=        22, this_wait=        30, mem_ptr=    3
+                 145: clk_cntr=        23, this_wait=        30, mem_ptr=    3
+                 147: clk_cntr=        24, this_wait=        30, mem_ptr=    3
+                 149: clk_cntr=        25, this_wait=        30, mem_ptr=    3
+                 151: clk_cntr=        26, this_wait=        30, mem_ptr=    3
+                 153: clk_cntr=        27, this_wait=        30, mem_ptr=    3
+                 155: clk_cntr=        28, this_wait=        30, mem_ptr=    3
+                 157: clk_cntr=        29, this_wait=        30, mem_ptr=    3
+                 159: clk_cntr=        30, this_wait=        30, mem_ptr=    3
+                 161: just waited         40
+                 161: Finished rep #         1
+                 161: clk_cntr=         1, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 163: clk_cntr=         2, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 165: clk_cntr=         3, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 167: clk_cntr=         4, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 169: clk_cntr=         5, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 171: clk_cntr=         6, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 173: clk_cntr=         7, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 175: clk_cntr=         8, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 177: clk_cntr=         9, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 179: clk_cntr=        10, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 181: clk_cntr=        11, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 183: clk_cntr=        12, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 185: clk_cntr=        13, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 187: clk_cntr=        14, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 189: clk_cntr=        15, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 191: clk_cntr=        16, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 193: clk_cntr=        17, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 195: clk_cntr=        18, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 197: clk_cntr=        19, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 199: clk_cntr=        20, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 201: clk_cntr=        21, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 203: clk_cntr=        22, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 205: clk_cntr=        23, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 207: clk_cntr=        24, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 209: clk_cntr=        25, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 211: clk_cntr=        26, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 213: clk_cntr=        27, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 215: clk_cntr=        28, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 217: clk_cntr=        29, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 219: clk_cntr=        30, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 221: clk_cntr=        31, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 223: clk_cntr=        32, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 225: clk_cntr=        33, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 227: clk_cntr=        34, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 229: clk_cntr=        35, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 231: clk_cntr=        36, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 233: clk_cntr=        37, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 235: clk_cntr=        38, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 237: clk_cntr=        39, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 239: clk_cntr=        40, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+                 241: just waited         10
+                 241: clk_cntr=         1, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                 243: clk_cntr=         2, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                 245: clk_cntr=         3, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                 247: clk_cntr=         4, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                 249: clk_cntr=         5, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                 251: clk_cntr=         6, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                 253: clk_cntr=         7, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                 255: clk_cntr=         8, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                 257: clk_cntr=         9, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                 259: clk_cntr=        10, this_wait=        10, mem_ptr=    1
+bram_portb_addr=1
+                 261: just waited         20
+                 261: clk_cntr=         1, this_wait=        20, mem_ptr=    2
+                 263: clk_cntr=         2, this_wait=        20, mem_ptr=    2
+                 265: clk_cntr=         3, this_wait=        20, mem_ptr=    2
+                 267: clk_cntr=         4, this_wait=        20, mem_ptr=    2
+                 269: clk_cntr=         5, this_wait=        20, mem_ptr=    2
+                 271: clk_cntr=         6, this_wait=        20, mem_ptr=    2
+                 273: clk_cntr=         7, this_wait=        20, mem_ptr=    2
+                 275: clk_cntr=         8, this_wait=        20, mem_ptr=    2
+                 277: clk_cntr=         9, this_wait=        20, mem_ptr=    2
+                 279: clk_cntr=        10, this_wait=        20, mem_ptr=    2
+                 281: clk_cntr=        11, this_wait=        20, mem_ptr=    2
+                 283: clk_cntr=        12, this_wait=        20, mem_ptr=    2
+                 285: clk_cntr=        13, this_wait=        20, mem_ptr=    2
+                 287: clk_cntr=        14, this_wait=        20, mem_ptr=    2
+                 289: clk_cntr=        15, this_wait=        20, mem_ptr=    2
+                 291: clk_cntr=        16, this_wait=        20, mem_ptr=    2
+                 293: clk_cntr=        17, this_wait=        20, mem_ptr=    2
+                 295: clk_cntr=        18, this_wait=        20, mem_ptr=    2
+                 297: clk_cntr=        19, this_wait=        20, mem_ptr=    2
+                 299: clk_cntr=        20, this_wait=        20, mem_ptr=    2
+                 301: just waited         30
+                 301: clk_cntr=         1, this_wait=        30, mem_ptr=    3
+                 303: clk_cntr=         2, this_wait=        30, mem_ptr=    3
+                 305: clk_cntr=         3, this_wait=        30, mem_ptr=    3
+                 307: clk_cntr=         4, this_wait=        30, mem_ptr=    3
+                 309: clk_cntr=         5, this_wait=        30, mem_ptr=    3
+                 311: clk_cntr=         6, this_wait=        30, mem_ptr=    3
+                 313: clk_cntr=         7, this_wait=        30, mem_ptr=    3
+                 315: clk_cntr=         8, this_wait=        30, mem_ptr=    3
+                 317: clk_cntr=         9, this_wait=        30, mem_ptr=    3
+                 319: clk_cntr=        10, this_wait=        30, mem_ptr=    3
+                 321: clk_cntr=        11, this_wait=        30, mem_ptr=    3
+                 323: clk_cntr=        12, this_wait=        30, mem_ptr=    3
+                 325: clk_cntr=        13, this_wait=        30, mem_ptr=    3
+                 327: clk_cntr=        14, this_wait=        30, mem_ptr=    3
+                 329: clk_cntr=        15, this_wait=        30, mem_ptr=    3
+                 331: clk_cntr=        16, this_wait=        30, mem_ptr=    3
+                 333: clk_cntr=        17, this_wait=        30, mem_ptr=    3
+                 335: clk_cntr=        18, this_wait=        30, mem_ptr=    3
+                 337: clk_cntr=        19, this_wait=        30, mem_ptr=    3
+                 339: clk_cntr=        20, this_wait=        30, mem_ptr=    3
+                 341: clk_cntr=        21, this_wait=        30, mem_ptr=    3
+                 343: clk_cntr=        22, this_wait=        30, mem_ptr=    3
+                 345: clk_cntr=        23, this_wait=        30, mem_ptr=    3
+                 347: clk_cntr=        24, this_wait=        30, mem_ptr=    3
+                 349: clk_cntr=        25, this_wait=        30, mem_ptr=    3
+                 351: clk_cntr=        26, this_wait=        30, mem_ptr=    3
+                 353: clk_cntr=        27, this_wait=        30, mem_ptr=    3
+                 355: clk_cntr=        28, this_wait=        30, mem_ptr=    3
+                 357: clk_cntr=        29, this_wait=        30, mem_ptr=    3
+                 359: clk_cntr=        30, this_wait=        30, mem_ptr=    3
+done!
+                 361: just waited         40
+                 361: Finished rep #         2
+                 361: clk_cntr=         1, this_wait=        40, mem_ptr=    0
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0
+off
+bram_portb_addr=0

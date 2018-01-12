@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../rp-ttl-gen.srcs/sources_1/bd/system/ipshared/ec67/hdl" --include "../../../../rp-ttl-gen.srcs/sources_1/bd/system/ipshared/02c8/hdl/verilog" --include "../../../../rp-ttl-gen.srcs/sources_1/bd/system/ipshared/1313/hdl" --include "/opt/Xilinx/Vivado/2017.4/data/xilinx_vip/include" \
+"../../../../rp-ttl-gen.srcs/sources_1/new/ttl_gen.v" \
+"../../../../rp-ttl-gen.srcs/sim_1/new/ttl_gen_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
