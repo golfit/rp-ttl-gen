@@ -2,3 +2,6 @@ Running: xsim.dir/ttl_gen_tb_behav/xsimk -simmode gui -wdb ttl_gen_tb_behav.wdb 
 Design successfully loaded
 Design Loading Memory Usage: 46932 KB (Peak: 47052 KB)
 Design Loading CPU Usage: 20 ms
+Simulation completed
+Simulation Memory Usage: 128932 KB (Peak: 194208 KB)
+Simulation CPU Usage: 20 ms

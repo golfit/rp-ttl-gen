@@ -25,8 +25,7 @@ module ttl_gen #
   parameter integer AXIS_TDATA_WIDTH = 32,
   parameter integer BRAM_DATA_WIDTH = 32, //BRAM_DATA_WIDTH=2^LOG2_DATA_WIDTH
   parameter integer LOG2_DATA_WIDTH = 5, //BRAM_DATA_WIDTH=2^LOG2_DATA_WIDTH
-  parameter integer BRAM_ADDR_WIDTH = 16,  // 2^15 = 32768 positions
-  parameter integer AVERAGES_WIDTH = 32
+  parameter integer BRAM_ADDR_WIDTH = 16  // 2^15 = 32768 positions
 )
 (
     // TTL-Gen-specific ports
