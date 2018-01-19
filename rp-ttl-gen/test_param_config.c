@@ -19,14 +19,14 @@ int main(int argc, char **argv)
   uint32_t waveform_addr=0x42000000; //In the initial configuration of this module, this is the offset for the waveform memory address
   //void *cfg;
   
-  int waveform_val[]={1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,
+  uint32_t waveform_val[]={1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,
                     65536,131072,262144,524288,1048576,2097152,4194304,8388608,
                     16777216,33554432,67108864,134217728};
-  int num_cycles_val=sizeof(waveform);
-  int num_reps_val=10;
-  int init_val_val=0;
+  uint32_t num_cycles_val=sizeof(waveform_val);
+  uint32_t num_reps_val=10;
+  uint32_t init_val_val=0;
   
-  void *num_cycles, *num_reps, *init_val, *waveform; //Pointers to memory locations where values are expected by FPGA
+  uint32_t *num_cycles, *num_reps, *init_val, *waveform; //Pointers to memory locations where values are expected by FPGA
   
   char *name = "/dev/mem";
   //const int freq = 124998750; // Hz
@@ -58,11 +58,11 @@ int main(int argc, char **argv)
   //Assign parameter values to correct locations in memory
   *((uint32_t *)(num_cycles + 0)) = num_cycles_val;
   *((uint32_t *)(num_reps + 0)) = num_reps_val;  
-  *((uint32_t *)(init_val + 0)) = init_val;  
+  *((uint32_t *)(init_val + 0)) = init_val_val;  
   
   //Copy waveform values into appropriate memory locations, one at a time
-  for(i=0; i<num_cycles_val; i++){
-    *((uint32_t *)(waveform + i)) = waveform_val[i];
+  for(int i=0; i<num_cycles_val; i++){
+    *((uint32_t *)(waveform + i*32)) = waveform_val[i]; //Offset by 32 bits per number in waveform times
   }
   
   //sleep(wait_time);   // wait for [wait_time] seconds
@@ -75,6 +75,11 @@ int main(int argc, char **argv)
   //       count, (double)count/freq);
  
   //munmap(cfg, sysconf(_SC_PAGESIZE));
+  printf("Done setting parameters.");
+  printf("num_cycles is at address, %x, and has the value, %d",num_cycles,*((uint32_t *)(num_cycles+0)));
+  printf("num_reps is at address, %x, and has the value, %d",num_reps,*((uint32_t *)(num_reps+0)));
+  printf("init_val is at address, %x, and has the value, %d",init_val,*((uint32_t *)(init_val+0)));
+  printf("waveform starts at address, %x, ends at address, %x, and has initial value, %d, and final value, %d", waveform, waveform+num_cycles_val*32, *((uint32_t *)(waveform+0)),*((uint32_t *)(waveform+32*num_cycles_val)));
   sleep(100); //Wait for a while to check memory
   
   return 0;

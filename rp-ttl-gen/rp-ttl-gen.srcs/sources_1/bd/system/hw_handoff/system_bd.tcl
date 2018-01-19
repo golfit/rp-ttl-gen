@@ -974,7 +974,7 @@ proc create_root_design { parentCell } {
   create_bd_addr_seg -range 0x00001000 -offset 0x41200000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs axi_gpio_0/S_AXI/Reg] SEG_axi_gpio_0_Reg
   create_bd_addr_seg -range 0x00001000 -offset 0x41210000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs axi_gpio_1/S_AXI/Reg] SEG_axi_gpio_1_Reg
   create_bd_addr_seg -range 0x00001000 -offset 0x41220000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs axi_gpio_2/S_AXI/Reg] SEG_axi_gpio_2_Reg
-  create_bd_addr_seg -range 0x00800000 -offset 0x42000000 [get_bd_addr_spaces ttl_gen_axi_v2_0_M00_AXI_0/M_AXI] [get_bd_addr_segs processing_system7_0/S_AXI_HP0/HP0_DDR_LOWOCM] SEG_processing_system7_0_HP0_DDR_LOWOCM
+  create_bd_addr_seg -range 0x20000000 -offset 0x00000000 [get_bd_addr_spaces ttl_gen_axi_v2_0_M00_AXI_0/M_AXI] [get_bd_addr_segs processing_system7_0/S_AXI_HP0/HP0_DDR_LOWOCM] SEG_processing_system7_0_HP0_DDR_LOWOCM
 
 
   # Restore current instance

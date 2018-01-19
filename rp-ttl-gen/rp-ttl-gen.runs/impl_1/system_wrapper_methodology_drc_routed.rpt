@@ -1,0 +1,92 @@
+Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2017.4 (lin64) Build 2086221 Fri Dec 15 20:54:30 MST 2017
+| Date         : Fri Jan 19 18:19:40 2018
+| Host         : cmodws121 running 64-bit Red Hat Enterprise Linux Server release 7.4 (Maipo)
+| Command      : report_methodology -file system_wrapper_methodology_drc_routed.rpt -pb system_wrapper_methodology_drc_routed.pb -rpx system_wrapper_methodology_drc_routed.rpx
+| Design       : system_wrapper
+| Device       : xc7z010clg400-1
+| Speed File   : -1
+| Design State : Routed
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Report Methodology
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+             Max violations: <unlimited>
+             Violations found: 8
++----------+----------+-------------------------------------------------------------+------------+
+| Rule     | Severity | Description                                                 | Violations |
++----------+----------+-------------------------------------------------------------+------------+
+| TIMING-2 | Warning  | Invalid primary clock source pin                            | 2          |
+| TIMING-4 | Warning  | Invalid primary clock redefinition on a clock tree          | 1          |
+| XDCB-2   | Warning  | Clock defined on multiple objects                           | 3          |
+| XDCB-4   | Warning  | create_clock constraint set on both sides of diff pair port | 2          |
++----------+----------+-------------------------------------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+TIMING-2#1 Warning
+Invalid primary clock source pin  
+A primary clock system_i/util_ds_buf_1/U0/IBUF_OUT[1] is created on an inappropriate pin system_i/util_ds_buf_1/U0/IBUF_OUT[0]. It is recommended to create a primary clock only on a proper clock source (input port or primitive output pin with no timing arc)
+Related violations: <none>
+
+TIMING-2#2 Warning
+Invalid primary clock source pin  
+A primary clock system_i/util_ds_buf_1/U0/IBUF_OUT[1] is created on an inappropriate pin system_i/util_ds_buf_1/U0/IBUF_OUT[1]. It is recommended to create a primary clock only on a proper clock source (input port or primitive output pin with no timing arc)
+Related violations: <none>
+
+TIMING-4#1 Warning
+Invalid primary clock redefinition on a clock tree  
+Invalid clock redefinition on a clock tree. The primary clock system_i/util_ds_buf_1/U0/IBUF_OUT[1] is defined downstream of clock rx_clk and overrides its insertion delay and/or waveform definition
+Related violations: <none>
+
+XDCB-2#1 Warning
+Clock defined on multiple objects  
+The clock daisy_n_o[1] is defined on multiple objects. Although this is logically functional for timing analysis, it cannot exist in hardware. It is recommended to define a primary clock on a single object.
+create_clock -period 10.000 [get_ports [list {daisy_n_o[0]} {daisy_n_o[1]}]]
+/home/golfit/git/rp/rp-ttl-gen/rp-ttl-gen/rp-ttl-gen.srcs/sources_1/bd/system/ip/system_util_ds_buf_2_0/system_util_ds_buf_2_0.xdc (Line: 5)
+Related violations: <none>
+
+XDCB-2#2 Warning
+Clock defined on multiple objects  
+The clock daisy_p_o[1] is defined on multiple objects. Although this is logically functional for timing analysis, it cannot exist in hardware. It is recommended to define a primary clock on a single object.
+create_clock -period 10.000 [get_ports [list {daisy_p_o[0]} {daisy_p_o[1]}]]
+/home/golfit/git/rp/rp-ttl-gen/rp-ttl-gen/rp-ttl-gen.srcs/sources_1/bd/system/ip/system_util_ds_buf_2_0/system_util_ds_buf_2_0.xdc (Line: 4)
+Related violations: <none>
+
+XDCB-2#3 Warning
+Clock defined on multiple objects  
+The clock system_i/util_ds_buf_1/U0/IBUF_OUT[1] is defined on multiple objects. Although this is logically functional for timing analysis, it cannot exist in hardware. It is recommended to define a primary clock on a single object.
+create_clock -period 10.000 [get_ports -scoped_to_current_instance IBUF_OUT]
+/home/golfit/git/rp/rp-ttl-gen/rp-ttl-gen/rp-ttl-gen.srcs/sources_1/bd/system/ip/system_util_ds_buf_1_0/system_util_ds_buf_1_0.xdc (Line: 4)
+Related violations: <none>
+
+XDCB-4#1 Warning
+create_clock constraint set on both sides of diff pair port  
+Two clock definitions daisy_p_o[1] and daisy_n_o[1] found on differential ports daisy_p_o[0] and daisy_n_o[0]. It is recommended to only create a clock on port P.
+create_clock -period 10.000 [get_ports [list {daisy_p_o[0]} {daisy_p_o[1]}]]
+/home/golfit/git/rp/rp-ttl-gen/rp-ttl-gen/rp-ttl-gen.srcs/sources_1/bd/system/ip/system_util_ds_buf_2_0/system_util_ds_buf_2_0.xdc (Line: 4)
+create_clock -period 10.000 [get_ports [list {daisy_n_o[0]} {daisy_n_o[1]}]]
+/home/golfit/git/rp/rp-ttl-gen/rp-ttl-gen/rp-ttl-gen.srcs/sources_1/bd/system/ip/system_util_ds_buf_2_0/system_util_ds_buf_2_0.xdc (Line: 5)
+Related violations: <none>
+
+XDCB-4#2 Warning
+create_clock constraint set on both sides of diff pair port  
+Two clock definitions daisy_p_o[1] and daisy_n_o[1] found on differential ports daisy_p_o[1] and daisy_n_o[1]. It is recommended to only create a clock on port P.
+create_clock -period 10.000 [get_ports [list {daisy_p_o[0]} {daisy_p_o[1]}]]
+/home/golfit/git/rp/rp-ttl-gen/rp-ttl-gen/rp-ttl-gen.srcs/sources_1/bd/system/ip/system_util_ds_buf_2_0/system_util_ds_buf_2_0.xdc (Line: 4)
+create_clock -period 10.000 [get_ports [list {daisy_n_o[0]} {daisy_n_o[1]}]]
+/home/golfit/git/rp/rp-ttl-gen/rp-ttl-gen/rp-ttl-gen.srcs/sources_1/bd/system/ip/system_util_ds_buf_2_0/system_util_ds_buf_2_0.xdc (Line: 5)
+Related violations: <none>
+
+
