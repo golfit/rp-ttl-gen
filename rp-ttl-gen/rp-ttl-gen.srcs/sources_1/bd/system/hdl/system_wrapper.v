@@ -1,7 +1,7 @@
 //Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2017.4 (lin64) Build 2086221 Fri Dec 15 20:54:30 MST 2017
-//Date        : Fri Jan  5 10:27:31 2018
+//Date        : Fri Jan 19 17:44:05 2018
 //Host        : cmodws121 running 64-bit Red Hat Enterprise Linux Server release 7.4 (Maipo)
 //Command     : generate_target system_wrapper.bd
 //Design      : system_wrapper
@@ -38,6 +38,7 @@ module system_wrapper
     adc_dat_b_i,
     adc_enc_n_o,
     adc_enc_p_o,
+    arm,
     dac_clk_o,
     dac_dat_o,
     dac_pwm_o,
@@ -48,9 +49,8 @@ module system_wrapper
     daisy_n_o,
     daisy_p_i,
     daisy_p_o,
-    exp_n_tri_io,
-    exp_p_tri_io,
-    led_o);
+    led_o,
+    trig);
   inout [14:0]DDR_addr;
   inout [2:0]DDR_ba;
   inout DDR_cas_n;
@@ -79,6 +79,7 @@ module system_wrapper
   input [13:0]adc_dat_b_i;
   output adc_enc_n_o;
   output adc_enc_p_o;
+  input arm;
   output dac_clk_o;
   output [13:0]dac_dat_o;
   output [3:0]dac_pwm_o;
@@ -89,9 +90,8 @@ module system_wrapper
   output [1:0]daisy_n_o;
   input [1:0]daisy_p_i;
   output [1:0]daisy_p_o;
-  inout [7:0]exp_n_tri_io;
-  inout [7:0]exp_p_tri_io;
   output [7:0]led_o;
+  input trig;
 
   wire [14:0]DDR_addr;
   wire [2:0]DDR_ba;
@@ -121,6 +121,7 @@ module system_wrapper
   wire [13:0]adc_dat_b_i;
   wire adc_enc_n_o;
   wire adc_enc_p_o;
+  wire arm;
   wire dac_clk_o;
   wire [13:0]dac_dat_o;
   wire [3:0]dac_pwm_o;
@@ -131,9 +132,8 @@ module system_wrapper
   wire [1:0]daisy_n_o;
   wire [1:0]daisy_p_i;
   wire [1:0]daisy_p_o;
-  wire [7:0]exp_n_tri_io;
-  wire [7:0]exp_p_tri_io;
   wire [7:0]led_o;
+  wire trig;
 
   system system_i
        (.DDR_addr(DDR_addr),
@@ -164,6 +164,7 @@ module system_wrapper
         .adc_dat_b_i(adc_dat_b_i),
         .adc_enc_n_o(adc_enc_n_o),
         .adc_enc_p_o(adc_enc_p_o),
+        .arm(arm),
         .dac_clk_o(dac_clk_o),
         .dac_dat_o(dac_dat_o),
         .dac_pwm_o(dac_pwm_o),
@@ -174,7 +175,6 @@ module system_wrapper
         .daisy_n_o(daisy_n_o),
         .daisy_p_i(daisy_p_i),
         .daisy_p_o(daisy_p_o),
-        .exp_n_tri_io(exp_n_tri_io),
-        .exp_p_tri_io(exp_p_tri_io),
-        .led_o(led_o));
+        .led_o(led_o),
+        .trig(trig));
 endmodule

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Jan 17 16:01:54 2018" VIVADOVERSION="2017.4">
+
+  <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="ttl_gen_axi" PACKAGE="clg400" SPEEDGRADE="-1"/>
+
+  <EXTERNALPORTS/>
+
+  <EXTERNALINTERFACES/>
+
+  <MODULES/>
+
+</EDKSYSTEM>

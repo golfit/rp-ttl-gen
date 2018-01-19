@@ -1,13 +1,9 @@
-
 `timescale 1 ns / 1 ps
 
 	module ttl_gen_axi_v2_0_M00_AXI #
 	(
 		// Users to add parameters here
-        parameter integer AXIS_TDATA_WIDTH = 32,
-        parameter integer BRAM_DATA_WIDTH = 32, //BRAM_DATA_WIDTH=2^LOG2_DATA_WIDTH
-        parameter integer LOG2_DATA_WIDTH = 5, //BRAM_DATA_WIDTH=2^LOG2_DATA_WIDTH
-        parameter integer BRAM_ADDR_WIDTH = 16  // 2^15 = 32768 positions
+        parameter integer LOG2_DATA_WIDTH = 5, //C_M_AXI_DATA_WIDTH=2^LOG2_DATA_WIDTH
         
 		// User parameters ends
 		// Do not modify the parameters beyond this line
@@ -16,7 +12,7 @@
 		parameter  C_M_START_DATA_VALUE	= 32'hAA000000,
 		// The master requires a target slave base address.
     // The master will initiate read and write transactions on the slave with base address specified here as a parameter.
-		parameter  C_M_TARGET_SLAVE_BASE_ADDR	= 32'h40000000,
+		parameter  C_M_TARGET_SLAVE_BASE_ADDR	= 32'h42000000,
 		// Width of M_AXI address bus. 
     // The master generates the read and write addresses of width specified as C_M_AXI_ADDR_WIDTH.
 		parameter integer C_M_AXI_ADDR_WIDTH	= 32,
@@ -28,23 +24,25 @@
 		parameter integer C_M_TRANSACTIONS_NUM	= 4
 	)
 	(
+        // ////////////////////////////////////////	
 		// Users to add ports here
-        input clk, arm, trig,
-        input [BRAM_DATA_WIDTH-1:0] num_cycles, //Number of cycles 
-        input [BRAM_DATA_WIDTH-1:0] num_reps, //Number of repetitions of pattern - i.e. total number of cycles=num_cycles*num_reps
+        input clk, arm, trig, //Note: arm is connected to FPGA Pin H16 (that's GPIO Pin DIO1_P, and trig to FPGA Pin G17 (that's GPIO Pin DIO0_P)
+        input [C_M_AXI_DATA_WIDTH-1:0] num_cycles, //Number of cycles 
+        input [C_M_AXI_DATA_WIDTH-1:0] num_reps, //Number of repetitions of pattern - i.e. total number of cycles=num_cycles*num_reps
         input init_val,
-        output out,
+        output v_out,
         output [1:0] state,
         output error_flag,
 		// User ports ends
+		// ////////////////////////////////////////
 		// Do not modify the ports beyond this line
 
 		// Initiate AXI transactions
-		input wire  INIT_AXI_TXN,
+		//input wire  INIT_AXI_TXN,
 		// Asserts when ERROR is detected
-		output reg  ERROR,
+		//output reg  ERROR,
 		// Asserts when AXI transactions is complete
-		output wire  TXN_DONE,
+		//output wire  TXN_DONE,
 		// AXI clock signal
 		input wire  M_AXI_ACLK,
 		// AXI active low reset signal
@@ -115,22 +113,12 @@
 	// number of write or read transaction.
 	 localparam integer TRANS_NUM_BITS = clogb2(C_M_TRANSACTIONS_NUM-1);
 
-	// Example State machine to initialize counter, initialize write transactions, 
-	// initialize read transactions and comparison of read data with the 
-	// written data words.
-	parameter [1:0] IDLE = 2'b00, // This state initiates AXI4Lite transaction 
-			// after the state machine changes state to INIT_WRITE   
-			// when there is 0 to 1 transition on INIT_AXI_TXN
-		INIT_WRITE   = 2'b01, // This state initializes write transaction,
-			// once writes are done, the state machine 
-			// changes state to INIT_READ 
-		INIT_READ = 2'b10, // This state initializes read transaction
-			// once reads are done, the state machine 
-			// changes state to INIT_COMPARE 
-		INIT_COMPARE = 2'b11; // This state issues the status of comparison 
-			// of the written data with the read data	
+	parameter [1:0] IDLE_STATE = 2'b00, // Here, the device is waiting for an arm state.
+		ARM_STATE   = 2'b01, // The device loads initial operating parameters from memory and waits for a trigger
+		TRIGGERED_STATE = 2'b10, // The device runs through its programmed sequence of values
+		ERROR_STATE = 2'b11; // The device is in an error state	
 
-	 reg [1:0] mst_exec_state;
+    reg [1:0] mst_exec_state;
 
 	// AXI4LITE signals
 	//write address valid
@@ -170,11 +158,11 @@
 	//index counter to track the number of write transaction issued
 	reg [TRANS_NUM_BITS : 0] 	write_index;
 	//index counter to track the number of read transaction issued
-	reg [TRANS_NUM_BITS : 0] 	read_index;
+	reg [TRANS_NUM_BITS : 0] 	read_index, last_read; //Last read caches previous value of read_index to identify whether a new read has occurred.
 	//Expected read data used to compare with the read data.
 	reg [C_M_AXI_DATA_WIDTH-1 : 0] 	expected_rdata;
 	//Flag marks the completion of comparison of the read data with the expected read data
-	reg  	compare_done;
+	//reg  	compare_done;
 	//This flag is asserted when there is a mismatch of the read data with the expected read data.
 	reg  	read_mismatch;
 	//Flag is asserted when the write index reaches the last write transction number
@@ -189,18 +177,19 @@
 
 	// I/O Connections assignments
 
+    //Turn OFF all write outputs - not doing so may cause problems that pass logic test, but fail implementation 
 	//Adding the offset address to the base addr of the slave
-	assign M_AXI_AWADDR	= C_M_TARGET_SLAVE_BASE_ADDR + axi_awaddr;
+	assign M_AXI_AWADDR	= 0;//C_M_TARGET_SLAVE_BASE_ADDR + axi_awaddr;
 	//AXI 4 write data
-	assign M_AXI_WDATA	= axi_wdata;
+	assign M_AXI_WDATA	= 0;//axi_wdata;
 	assign M_AXI_AWPROT	= 3'b000;
-	assign M_AXI_AWVALID	= axi_awvalid;
+	assign M_AXI_AWVALID	= 0;//axi_awvalid;
 	//Write Data(W)
-	assign M_AXI_WVALID	= axi_wvalid;
+	assign M_AXI_WVALID	= 0;//axi_wvalid;
 	//Set all byte strobes in this example
 	assign M_AXI_WSTRB	= 4'b1111;
 	//Write Response (B)
-	assign M_AXI_BREADY	= axi_bready;
+	assign M_AXI_BREADY	= 0;//axi_bready;
 	//Read Address (AR)
 	assign M_AXI_ARADDR	= C_M_TARGET_SLAVE_BASE_ADDR + axi_araddr;
 	assign M_AXI_ARVALID	= axi_arvalid;
@@ -208,25 +197,25 @@
 	//Read and Read Response (R)
 	assign M_AXI_RREADY	= axi_rready;
 	//Example design I/O
-	assign TXN_DONE	= compare_done;
-	assign init_txn_pulse	= (!init_txn_ff2) && init_txn_ff;
+	//assign TXN_DONE	= compare_done;
+//	assign init_txn_pulse	= (!init_txn_ff2) && init_txn_ff;
 
 
-	//Generate a pulse to initiate AXI transaction.
-	always @(posedge M_AXI_ACLK)										      
-	  begin                                                                        
-	    // Initiates AXI transaction delay    
-	    if (M_AXI_ARESETN == 0 )                                                   
-	      begin                                                                    
-	        init_txn_ff <= 1'b0;                                                   
-	        init_txn_ff2 <= 1'b0;                                                   
-	      end                                                                               
-	    else                                                                       
-	      begin  
-	        init_txn_ff <= INIT_AXI_TXN;
-	        init_txn_ff2 <= init_txn_ff;                                                                 
-	      end                                                                      
-	  end     
+//	//Generate a pulse to initiate AXI transaction.
+//	always @(posedge M_AXI_ACLK)										      
+//	  begin                                                                        
+//	    // Initiates AXI transaction delay    
+//	    if (M_AXI_ARESETN == 0 )                                                   
+//	      begin                                                                    
+//	        init_txn_ff <= 1'b0;                                                   
+//	        init_txn_ff2 <= 1'b0;                                                   
+//	      end                                                                               
+//	    else                                                                       
+//	      begin  
+//	        init_txn_ff <= INIT_AXI_TXN;
+//	        init_txn_ff2 <= init_txn_ff;                                                                 
+//	      end                                                                      
+//	  end     
 
 
     //----------------------------
@@ -238,7 +227,7 @@
 
 	  always @(posedge M_AXI_ACLK)                                                     
 	  begin                                                                            
-	    if (M_AXI_ARESETN == 0 || init_txn_pulse == 1'b1)                                                       
+	    if (M_AXI_ARESETN == 0 )//|| init_txn_pulse == 1'b1)                                                       
 	      begin                                                                        
 	        read_index <= 0;                                                           
 	      end                                                                          
@@ -255,7 +244,7 @@
 	  // transaction                                                                   
 	  always @(posedge M_AXI_ACLK)                                                     
 	  begin                                                                            
-	    if (M_AXI_ARESETN == 0 || init_txn_pulse == 1'b1)                                                       
+	    if (M_AXI_ARESETN == 0)// || init_txn_pulse == 1'b1)                                                       
 	      begin                                                                        
 	        axi_arvalid <= 1'b0;                                                       
 	      end                                                                          
@@ -285,7 +274,7 @@
 
 	  always @(posedge M_AXI_ACLK)                                    
 	  begin                                                                 
-	    if (M_AXI_ARESETN == 0 || init_txn_pulse == 1'b1)                                            
+	    if (M_AXI_ARESETN == 0)// || init_txn_pulse == 1'b1)                                            
 	      begin                                                             
 	        axi_rready <= 1'b0;                                             
 	      end                                                               
@@ -293,7 +282,8 @@
 	    // when M_AXI_RVALID is asserted by slave                           
 	    else if (M_AXI_RVALID && ~axi_rready)                               
 	      begin                                                             
-	        axi_rready <= 1'b1;                                             
+	        axi_rready <= 1'b1;
+	        next_wait <=M_AXI_RDATA; //Register wait time - TG
 	      end                                                               
 	    // deassert after one clock cycle                                   
 	    else if (axi_rready)                                                
@@ -306,75 +296,29 @@
 	//Flag write errors                                                     
 	assign read_resp_error = (axi_rready & M_AXI_RVALID & M_AXI_RRESP[1]);  
 
-
-	//--------------------------------
+    //--------------------------------
 	//User Logic
 	//--------------------------------
 
-	//------------------                                                                
-	//Read example                                                                      
-	//------------------                                                                
-	                                                                                    
-	//Terminal Read Count                                                               
-	                                                                                    
-	  always @(posedge M_AXI_ACLK)                                                      
-	  begin                                                                             
-	    if (M_AXI_ARESETN == 0 || init_txn_pulse == 1'b1)                                                         
-	      last_read <= 1'b0;                                                            
-	                                                                                    
-	    //The last read should be associated with a read address ready response         
-	    else if ((read_index == C_M_TRANSACTIONS_NUM) && (M_AXI_ARREADY) )              
-	      last_read <= 1'b1;                                                            
-	    else                                                                            
-	      last_read <= last_read;                                                       
-	  end                                                                               
-	                                                                                    
-	/*                                                                                  
-	 Check for last read completion.                                                    
-	                                                                                    
-	 This logic is to qualify the last read count with the final read                   
-	 response/data.                                                                     
-	 */                                                                                 
-	  always @(posedge M_AXI_ACLK)                                                      
-	  begin                                                                             
-	    if (M_AXI_ARESETN == 0 || init_txn_pulse == 1'b1)                                                         
-	      reads_done <= 1'b0;                                                           
-	                                                                                    
-	    //The reads_done should be associated with a read ready response                
-	    else if (last_read && M_AXI_RVALID && axi_rready)                               
-	      reads_done <= 1'b1;                                                           
-	    else                                                                            
-	      reads_done <= reads_done;                                                     
-	    end                                                                                                                                 
 	// Add user logic here
 
-    reg [BRAM_DATA_WIDTH-1:0] clk_cntr; //32 bits means ~34.4 s at 125 MHz
-    reg [BRAM_DATA_WIDTH-1:0] wait_reg; //Register the wait time before state change
-    reg [BRAM_ADDR_WIDTH-1:0] mem_ptr; //Pointer into memory
-    reg [BRAM_DATA_WIDTH-1:0] next_wait; //Value of the memory at current address
+    reg [C_M_AXI_DATA_WIDTH-1:0] clk_cntr; //32 bits means ~34.4 s at 125 MHz
+    reg [C_M_AXI_DATA_WIDTH-1:0] wait_reg; //Register the wait time before state change
+    //reg [C_M_AXI_ADDR_WIDTH-1:0] axi_araddr; //Pointer into memory //This is superseded by axi_araddr
+    reg [C_M_AXI_DATA_WIDTH-1:0] first_wait, this_wait, next_wait; //Value of the memory at current and next addresses - cache ahead of time for memory I/O latency
     reg [1:0] state_reg; //Register the state for stability
-    reg [BRAM_DATA_WIDTH-1:0] cycle_cntr; //Register to count how many edges have been completed - this bit-shifted left LOG2_DATA_WIDTH times is the memory location.
-    reg [BRAM_DATA_WIDTH-1:0] rep_cntr; //Register to count how many repetitions of pattern have been completed.
+    reg [C_M_AXI_DATA_WIDTH-1:0] cycle_cntr; //Register to count how many edges have been completed - this bit-shifted left LOG2_DATA_WIDTH times is the memory location.
+    reg [C_M_AXI_DATA_WIDTH-1:0] rep_cntr; //Register to count how many repetitions of pattern have been completed.
     reg out_reg; //Register output
-    reg [BRAM_DATA_WIDTH-1:0] num_cycles_reg; //Register this during init.
-    reg [BRAM_DATA_WIDTH-1:0] num_reps_reg; //Register this during init.
-
+    reg [C_M_AXI_DATA_WIDTH-1:0] num_cycles_reg; //Register this during init.
+    reg [C_M_AXI_DATA_WIDTH-1:0] num_reps_reg; //Register this during init.
+    
+    reg trig_last, arm_last; //Register previous states of trigger and arm to identify rising edges.
+    
+    reg complete_flag; //Flag to indicate that a whole set of repetitions is complete, and the board may reenter the IDLE_STATE.
+    
     reg error_flag_reg; //Error flag register
     
-//    assign s_axis_tready = 1;
-     
-//    assign bram_porta_clk = clk;
-//    assign bram_porta_addr = mem_ptr;
-//    assign bram_porta_wrdata = mem_val;//int_data_reg;
-//    assign bram_porta_we = int_wren_reg;
-
-    //Read data, only      
-    assign bram_portb_clk = clk;
-    assign bram_portb_rst = 0; //Don't reset memory
-    assign bram_portb_addr = mem_ptr;
-    assign bram_portb_wrdata = {(BRAM_DATA_WIDTH){1'b0}};
-    assign bram_portb_we = 1'b0;
-
     initial begin
         //Initialize registers (for simulations)
         #0 //At first simulated clock cycle 
@@ -382,37 +326,51 @@
     end
     
     assign state=state_reg; //Connect state to corresponding register
-    assign out=out_reg; //Connect output register to output wire.
+    assign vout=out_reg; //Connect output register to output wire.
     assign error_flag=error_flag_reg;
     
-    //When the arm signal has a rising edge, change the board state accordingly,
-    //but only do so when when the board is in an "off"="complete" state
-    always @(posedge arm) begin
-        //if (state==0) state_reg<=1;    
-        state_reg<=1; //state is initially at an undefined state - need to force a state at some point.
-    end
+//    //When the arm signal has a rising edge, change the board state accordingly,
+//    //but only do so when when the board is in an "off"="complete" state
+//    always @(posedge arm) begin
+//        //if (state==0) state_reg<=1;    
+//        state_reg<=1; //state is initially at an undefined state - need to force a state at some point.
+//    end
 
-    //When the trig (trigger) signal has a rising edge, change the board state accordingly,
-    //triggering the board behavior
-    always @(posedge trig) begin
-        if (state==1) state_reg<=2;
+//    //When the trig (trigger) signal has a rising edge, change the board state accordingly,
+//    //triggering the board behavior
+//    always @(posedge trig) begin
+//        if (state==1) state_reg<=2;
+//    end
+    
+    //Manage state register with non-blocking assignments.
+    always @(posedge clk or posedge complete_flag or posedge trig or posedge arm) begin
+        if(state_reg==IDLE_STATE && !arm_last && arm) begin
+            state_reg<=ARM_STATE; //Rising trigger edge - board has been triggered - start waveform
+        end else if(state_reg==ARM_STATE && !trig_last && trig) begin
+            state_reg<=TRIGGERED_STATE; //Rising trigger edge - board has been triggered - start waveform
+        end else if(state_reg==TRIGGERED_STATE && complete_flag) begin
+            state_reg<=IDLE_STATE; //
+        end 
     end
     
     always @(posedge clk) begin
-        if(~clk_cntr == 0) begin //If clock counter saturates, force the board off
-            state_reg=3;
-            out_reg=0;
-        end 
+//        if(~clk_cntr == 0) begin //If clock counter saturates, force the board off
+//            state_reg=3;
+//            out_reg=0;
+//        end
         
         case(state_reg)
-            0: //"Off" or "complete" state - force output low
+            IDLE_STATE: //"Off" or "complete" state - force output low
             begin
                 out_reg=0; //
-                //mem_ptr=0; //Initialize memory position pointer.
+                last_read=read_index; //Cache read_index - can't reset read index in this block unless enforce clocks to be the same
+                //axi_araddr=0; //Initialize memory position pointer.
+                start_single_read=0;
+                complete_flag=0; //Reset complete flag.
                 $display("off");
             end
             
-            1: //Board is armed - initialize board and wait for trigger 
+            ARM_STATE: //Board is armed - initialize board and wait for trigger 
             begin
                 //Note: Verilog doesn't have sign extension - it has zero extension (i.e. when number of bits on LHS is greater than on RHS, all unspecified bits are set to 0).
                 clk_cntr=0; //Initialize the clock counter
@@ -421,67 +379,101 @@
                 
                 //Memory:
                 //Get operation parameters from memory
-//                if(mem_ptr==0) begin
+//                if(axi_araddr==0) begin
 //                    //address 0 = num_reps - number of repeititions
 //                    num_reps_reg = mem_val;
-//                    mem_ptr = mem_ptr+1;
-//                end else if(mem_ptr==1) begin
+//                    axi_araddr = axi_araddr+1;
+//                end else if(axi_araddr==1) begin
 //                    //address 1 = number of cycles per repetition
 //                    num_cycles_reg = mem_val;
-//                    mem_ptr = mem_ptr+1;
-//                end else if(mem_ptr==2) begin
+//                    axi_araddr = axi_araddr+1;
+//                end else if(axi_araddr==2) begin
 //                    //address 2 = init value
 //                    out_reg=mem_val; //change output to initial value
-//                    mem_ptr=mem_ptr+1; //Advance memory pointer after assignment
+//                    axi_araddr=axi_araddr+1; //Advance memory pointer after assignment
 //                end
                 //addresses 3 to 3+number of cycles - 1 = transition times
                 out_reg=init_val; //Set output at initial value
-                mem_ptr=0; //Initialize memory pointer.
+
                 num_cycles_reg=num_cycles; //Register the total number of cycles per repetition (period)
                 num_reps_reg=num_reps; //Register the total number of repetitions
+
+                start_single_read=1; //Trigger read operation to pull first wait time from memory.
+                if(read_index==last_read) begin
+                    axi_araddr=0; //Initialize memory pointer.
+                end else if(read_index==last_read+1) begin
+                    this_wait=next_wait; //This is the first wait-time - store it and advance the 
+                    first_wait=next_wait; //Cache the first wait time for convenience at transitions from one repetition to the next.
+                    //Look ahead one memory address, if there is more than one wait time stored in memory
+                    if(num_cycles_reg>1) begin
+                        axi_araddr=C_M_AXI_DATA_WIDTH; //Initialize memory pointer at second memory location - already cached first value in first_wait.
+                        start_single_read=1; //Trigger read operation to pull second wait time from memory.
+                    end
+                end
+
                 error_flag_reg=0; //Set error_flag to zero
-                next_wait=bram_portb_rddata; //Register wait time
+                //first_wait=M_AXI_RDATA; //Cache first wait time
+                //if(axi_rready) begin
+                //    next_wait=M_AXI_RDATA; //Register wait time
+                //end
+                
                 $display("armed");
             end
             
-            2: //Board is triggered - output waveform until done, then return to State 0 ("Complete" or "off" state)
+            TRIGGERED_STATE: //Board is triggered - output waveform until done, then return to State 0 ("Complete" or "off" state)
             begin
-                if(clk_cntr>=next_wait && num_cycles_reg!=0 && num_reps_reg!=0) begin
+                if(start_single_read && axi_rready) begin
+                    start_single_read=0; //Zero read if it has been completed.
+                end
+                
+                if(clk_cntr>=this_wait && num_cycles_reg!=0 && num_reps_reg!=0) begin
+                    //This cycle is complete - change state and update wait time
                     $monitor("%d: just waited %d",$time, next_wait);
                     out_reg=~out_reg; //Invert output state
-                    //Fetch next wait time
+                    this_wait=next_wait; //Fetch next wait time (already read from memory thanks to look-ahead scheme)
                     cycle_cntr=cycle_cntr+1; //Increment cycle counter by one.
-                    mem_ptr=cycle_cntr; //Looks like don't have to have absolute mem address - only integer.
-                    next_wait=bram_portb_rddata; //Register wait time
+                    axi_araddr=axi_araddr+C_M_AXI_DATA_WIDTH; //Advance the address by one data width.
+                    start_single_read=1; //Trigger read operation to pull next wait time from memory.
+
+                    //next_wait=M_AXI_RDATA; //Register wait time
                     clk_cntr=1; //Restart clock counter - set to be time at NEXT clock cycle - i.e. the next time it will be queried.
                 end else begin
-                    $monitor("%d: clk_cntr=%d, this_wait=%d, mem_ptr=%d",$time, clk_cntr, next_wait,mem_ptr);
+                    $monitor("%d: clk_cntr=%d, this_wait=%d, axi_araddr=%d",$time, clk_cntr, next_wait,axi_araddr);
                     clk_cntr=clk_cntr+1; //Increment clock counter                
                 end
                 
                 if(cycle_cntr>=num_cycles_reg) begin
+                    //Completed all cycles in this repetition - restart from beginning of wait time sequence
                     $monitor("%d: Finished rep #%d",$time, rep_cntr);
                     rep_cntr=rep_cntr+1; //Increment repetition counter
                     cycle_cntr=0; //Restart cycle counter
-                    mem_ptr=cycle_cntr; //Looks like don't have to have absolute mem address - only integer.
-                    next_wait=bram_portb_rddata; //Register wait time
+                    this_wait=first_wait; //Restart wait time from beginning of sequence
+                    axi_araddr=C_M_AXI_DATA_WIDTH; //Look ahead wait time by one address in memory
+                    start_single_read=1; //Trigger read operation to pull first wait time from memory.
+                    //next_wait=M_AXI_RDATA; //Register wait time
                     out_reg=init_val; //Re-initialize output for another repetition.
                     clk_cntr=1; //Restart clock counter - set to be time at NEXT clock cycle, since it won't be checked again until then.
                 end 
                 
-                if(rep_cntr>=num_reps_reg) begin  //Completed all repetitions - exit this state
+                if(rep_cntr>=num_reps_reg) begin
+                    //Completed all repetitions - exit this state
                     out_reg=0; //Reset output
-                    state_reg=0; //Reset state
+                    complete_flag=1; //Set complete flag.
+                    //state_reg=IDLE_STATE; //Reset state
                     $display("done!");
                 end 
             end
             
-            3: //Error state
+            ERROR_STATE: //Error state
             begin
                 error_flag_reg=1; //Assert error flag
                 $display("error!");
             end
         endcase
+        
+        //Register trigger and arm inputs for comparison
+        trig_last=trig;
+        arm_last=arm;
     end
 	// User logic ends
 
