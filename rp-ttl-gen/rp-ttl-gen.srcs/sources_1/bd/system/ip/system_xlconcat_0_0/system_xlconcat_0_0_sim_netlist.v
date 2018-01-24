@@ -1,7 +1,7 @@
 // Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2017.4 (lin64) Build 2086221 Fri Dec 15 20:54:30 MST 2017
-// Date        : Fri Jan 19 16:07:40 2018
+// Date        : Tue Jan 23 20:42:23 2018
 // Host        : cmodws121 running 64-bit Red Hat Enterprise Linux Server release 7.4 (Maipo)
 // Command     : write_verilog -force -mode funcsim
 //               /home/golfit/git/rp/rp-ttl-gen/rp-ttl-gen/rp-ttl-gen.srcs/sources_1/bd/system/ip/system_xlconcat_0_0/system_xlconcat_0_0_sim_netlist.v
@@ -19,19 +19,27 @@ module system_xlconcat_0_0
     In1,
     In2,
     In3,
+    In4,
+    In5,
     dout);
   input [1:0]In0;
   input [0:0]In1;
   input [0:0]In2;
-  input [3:0]In3;
+  input [0:0]In3;
+  input [0:0]In4;
+  input [1:0]In5;
   output [7:0]dout;
 
   wire [1:0]In0;
   wire [0:0]In1;
   wire [0:0]In2;
-  wire [3:0]In3;
+  wire [0:0]In3;
+  wire [0:0]In4;
+  wire [1:0]In5;
 
-  assign dout[7:4] = In3;
+  assign dout[7:6] = In5;
+  assign dout[5] = In4;
+  assign dout[4] = In3;
   assign dout[3] = In2;
   assign dout[2] = In1;
   assign dout[1:0] = In0;

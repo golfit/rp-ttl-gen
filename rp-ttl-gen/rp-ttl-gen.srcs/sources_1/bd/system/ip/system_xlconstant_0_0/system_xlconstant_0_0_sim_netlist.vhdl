@@ -1,7 +1,7 @@
 -- Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2017.4 (lin64) Build 2086221 Fri Dec 15 20:54:30 MST 2017
--- Date        : Fri Jan 19 16:07:40 2018
+-- Date        : Tue Jan 23 20:42:23 2018
 -- Host        : cmodws121 running 64-bit Red Hat Enterprise Linux Server release 7.4 (Maipo)
 -- Command     : write_vhdl -force -mode funcsim
 --               /home/golfit/git/rp/rp-ttl-gen/rp-ttl-gen/rp-ttl-gen.srcs/sources_1/bd/system/ip/system_xlconstant_0_0/system_xlconstant_0_0_sim_netlist.vhdl
@@ -16,7 +16,7 @@ library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
 entity system_xlconstant_0_0 is
   port (
-    dout : out STD_LOGIC_VECTOR ( 3 downto 0 )
+    dout : out STD_LOGIC_VECTOR ( 1 downto 0 )
   );
   attribute NotValidForBitStream : boolean;
   attribute NotValidForBitStream of system_xlconstant_0_0 : entity is true;
@@ -29,14 +29,12 @@ entity system_xlconstant_0_0 is
 end system_xlconstant_0_0;
 
 architecture STRUCTURE of system_xlconstant_0_0 is
-  signal \<const0>\ : STD_LOGIC;
+  signal \<const1>\ : STD_LOGIC;
 begin
-  dout(3) <= \<const0>\;
-  dout(2) <= \<const0>\;
-  dout(1) <= \<const0>\;
-  dout(0) <= \<const0>\;
-GND: unisim.vcomponents.GND
+  dout(1) <= \<const1>\;
+  dout(0) <= \<const1>\;
+VCC: unisim.vcomponents.VCC
      port map (
-      G => \<const0>\
+      P => \<const1>\
     );
 end STRUCTURE;

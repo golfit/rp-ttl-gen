@@ -1,7 +1,7 @@
 -- Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2017.4 (lin64) Build 2086221 Fri Dec 15 20:54:30 MST 2017
--- Date        : Wed Jan 17 18:18:37 2018
+-- Date        : Tue Jan 23 15:37:25 2018
 -- Host        : cmodws121 running 64-bit Red Hat Enterprise Linux Server release 7.4 (Maipo)
 -- Command     : write_vhdl -force -mode synth_stub -rename_top system_auto_pc_0 -prefix
 --               system_auto_pc_0_ system_auto_pc_0_stub.vhdl

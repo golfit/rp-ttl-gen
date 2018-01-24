@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7z010clg400-1" LaunchTime="1516403889">
+<GenRun Id="impl_1" LaunchPart="xc7z010clg400-1" LaunchTime="1516764072">
   <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
   <File Type="BG-DRC" Name="system_wrapper.drc"/>
   <File Type="BG-BGN" Name="system_wrapper.bgn"/>
@@ -145,6 +145,7 @@
     <Step Id="post_route_phys_opt_design"/>
     <Step Id="write_bitstream"/>
   </Strategy>
+  <BlockFileSet Type="BlockSrcs" Name="system_xlslice_1_0"/>
   <BlockFileSet Type="BlockSrcs" Name="system_axi_gpio_1_0"/>
   <BlockFileSet Type="BlockSrcs" Name="system_axi_gpio_2_0"/>
   <BlockFileSet Type="BlockSrcs" Name="system_xbar_0"/>
@@ -153,6 +154,7 @@
   <BlockFileSet Type="BlockSrcs" Name="system_xlconcat_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="system_rst_ps7_0_125M_0"/>
   <BlockFileSet Type="BlockSrcs" Name="system_ttl_gen_axi_v2_0_M00_AXI_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="system_xlslice_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="system_util_ds_buf_2_0"/>
   <BlockFileSet Type="BlockSrcs" Name="system_util_ds_buf_1_0"/>
   <BlockFileSet Type="BlockSrcs" Name="system_axi_gpio_0_1"/>

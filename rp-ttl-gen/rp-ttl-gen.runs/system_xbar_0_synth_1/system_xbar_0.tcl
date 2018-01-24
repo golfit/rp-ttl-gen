@@ -42,7 +42,6 @@ set_property ip_output_repo /home/golfit/git/rp/rp-ttl-gen/rp-ttl-gen/rp-ttl-gen
 set_property ip_cache_permissions {read write} [current_project]
 set_property verilog_define TOOL_VIVADO [current_fileset]
 read_ip -quiet /home/golfit/git/rp/rp-ttl-gen/rp-ttl-gen/rp-ttl-gen.srcs/sources_1/bd/system/ip/system_xbar_0/system_xbar_0.xci
-set_property used_in_implementation false [get_files -all /home/golfit/git/rp/rp-ttl-gen/rp-ttl-gen/rp-ttl-gen.srcs/sources_1/bd/system/ip/system_xbar_0/system_xbar_0_ooc.xdc]
 
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -52,8 +51,6 @@ set_property used_in_implementation false [get_files -all /home/golfit/git/rp/rp
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc dont_touch.xdc
-set_property used_in_implementation false [get_files dont_touch.xdc]
 
 set cached_ip [config_ip_cache -export -no_bom -use_project_ipc -dir /home/golfit/git/rp/rp-ttl-gen/rp-ttl-gen/rp-ttl-gen.runs/system_xbar_0_synth_1 -new_name system_xbar_0 -ip [get_ips system_xbar_0]]
 

@@ -1,7 +1,7 @@
 -- Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2017.4 (lin64) Build 2086221 Fri Dec 15 20:54:30 MST 2017
--- Date        : Fri Jan 19 18:16:58 2018
+-- Date        : Tue Jan 23 22:19:52 2018
 -- Host        : cmodws121 running 64-bit Red Hat Enterprise Linux Server release 7.4 (Maipo)
 -- Command     : write_vhdl -force -mode synth_stub
 --               /home/golfit/git/rp/rp-ttl-gen/rp-ttl-gen/rp-ttl-gen.srcs/sources_1/bd/system/ip/system_ttl_gen_axi_v2_0_M00_AXI_0_0/system_ttl_gen_axi_v2_0_M00_AXI_0_0_stub.vhdl

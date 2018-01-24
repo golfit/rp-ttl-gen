@@ -12,7 +12,10 @@
 		parameter  C_M_START_DATA_VALUE	= 32'hAA000000,
 		// The master requires a target slave base address.
     // The master will initiate read and write transactions on the slave with base address specified here as a parameter.
-		parameter  C_M_TARGET_SLAVE_BASE_ADDR	= 32'h42000000,
+    //At one point, thought that needed to start at 0x42000000 or above 0x40000000.  This is wrong-headed.
+    //The General Purpose #0 port (GP0) starts at 0x40000000 for the Zynq boards,  GP1 at 0x80000000.
+    //BRAM at 0xC0000000.  DDR starts at 0x00000000.  Mapping to memory addresses is control otherwise.
+		parameter  C_M_TARGET_SLAVE_BASE_ADDR	= 32'h00000000, 
 		// Width of M_AXI address bus. 
     // The master generates the read and write addresses of width specified as C_M_AXI_ADDR_WIDTH.
 		parameter integer C_M_AXI_ADDR_WIDTH	= 32,
@@ -350,7 +353,13 @@
             state_reg<=TRIGGERED_STATE; //Rising trigger edge - board has been triggered - start waveform
         end else if(state_reg==TRIGGERED_STATE && complete_flag) begin
             state_reg<=IDLE_STATE; //
-        end 
+        end else if(!arm) begin
+            state_reg=IDLE_STATE; //Temporary - may need a better way to return to idle state then using arm as a gate. 
+        end
+                    
+        //Register trigger and arm inputs for comparison
+        trig_last=trig;
+        arm_last=arm;
     end
     
     always @(posedge clk) begin
@@ -470,10 +479,6 @@
                 $display("error!");
             end
         endcase
-        
-        //Register trigger and arm inputs for comparison
-        trig_last=trig;
-        arm_last=arm;
     end
 	// User logic ends
 
